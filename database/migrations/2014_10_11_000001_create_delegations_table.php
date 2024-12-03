@@ -14,10 +14,12 @@ return new class extends Migration
         Schema::create('delegations', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('id_region');
+            // $table->unsignedBigInteger('id_user');
             $table->string('delegacion', 150);
             $table->string('nivel_delegaciona', 250);
             $table->string('sede_delegaciona', 250);
             $table->foreign('id_region')->references('id')->on('regions');
+            // $table->foreign('id_user')->references('id')->on('users');
             $table->timestamps();
         });
     }

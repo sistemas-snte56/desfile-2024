@@ -13,9 +13,8 @@ class DelegacionController extends Controller
      */
     public function index()
     {
-        $delegaciones = Delegation::all();
-        // return view('admin.delegaciones.index', compact('delegaciones'));
-        return view('profile.update-profile-information-form', compact('delegaciones'));
+        $delegaciones = Delegation::orderBy('delegacion','asc')->get();
+        return view('admin.profile.index', compact('delegaciones'));
     }
 
     /**

@@ -14,8 +14,8 @@ return [
     |
     */
 
-    'title' => 'AdminLTE 3',
-    'title_prefix' => '',
+    'title' => 'Inicio',
+    'title_prefix' => 'Sección 56 | ',
     'title_postfix' => '',
 
     /*
@@ -30,7 +30,7 @@ return [
     |
     */
 
-    'use_ico_only' => false,
+    'use_ico_only' => true,
     'use_full_favicon' => false,
 
     /*
@@ -110,7 +110,7 @@ return [
     */
 
     'preloader' => [
-        'enabled' => true,
+        'enabled' => false,
         'mode' => 'fullscreen',
         'img' => [
             'path' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
@@ -154,8 +154,8 @@ return [
 
     'layout_topnav' => null,
     'layout_boxed' => null,
-    'layout_fixed_sidebar' => null,
-    'layout_fixed_navbar' => null,
+    'layout_fixed_sidebar' => true,
+    'layout_fixed_navbar' => true,
     'layout_fixed_footer' => null,
     'layout_dark_mode' => null,
 
@@ -171,12 +171,12 @@ return [
     |
     */
 
-    'classes_auth_card' => 'card-outline card-primary',
-    'classes_auth_header' => '',
-    'classes_auth_body' => '',
-    'classes_auth_footer' => '',
-    'classes_auth_icon' => '',
-    'classes_auth_btn' => 'btn-flat btn-primary',
+    'classes_auth_card' => 'bg-gradient-light',
+    'classes_auth_header' => 'bg-gradient-orange text-white',
+    'classes_auth_body' => 'bg-gradient-light',
+    'classes_auth_footer' => 'text-center',
+    'classes_auth_icon' => 'fa-lg text-orange',
+    'classes_auth_btn' => 'btn-flat btn-info', 
 
     /*
     |--------------------------------------------------------------------------
@@ -191,8 +191,8 @@ return [
     */
 
     'classes_body' => '',
-    'classes_brand' => '',
-    'classes_brand_text' => '',
+    'classes_brand' => 'bg-white',
+    'classes_brand_text' => 'text-orange font-bold',
     'classes_content_wrapper' => '',
     'classes_content_header' => '',
     'classes_content' => '',
@@ -214,7 +214,7 @@ return [
     |
     */
 
-    'sidebar_mini' => 'lg',
+    'sidebar_mini' => false,
     'sidebar_collapse' => false,
     'sidebar_collapse_auto_size' => false,
     'sidebar_collapse_remember' => false,
@@ -257,14 +257,14 @@ return [
     */
 
     'use_route_url' => false,
-    'dashboard_url' => 'home',
+    'dashboard_url' => 'dashboard',
     'logout_url' => 'logout',
     'login_url' => 'login',
     'register_url' => 'register',
     'password_reset_url' => 'password/reset',
     'password_email_url' => 'password/email',
     'profile_url' => false,
-    'disable_darkmode_routes' => false,
+    'disable_darkmode_routes' => true,
 
     /*
     |--------------------------------------------------------------------------
@@ -327,71 +327,57 @@ return [
             'label' => 4,
             'label_color' => 'success',
         ],
-        ['header' => 'account_settings'],
+
+
+
+        // Configuración Super Administrador
+        ['header' => 'CONFIGURACIÓN GENERAL'],
         [
-            'text' => 'profile',
-            'url' => 'admin/settings',
+            'text' => 'Regiones',
+            'url' => '#',
+            'icon' => 'fas fa-fw fa-user',
+        ],
+
+        [
+            'text' => 'Delegaciones',
+            'url' => '#',
             'icon' => 'fas fa-fw fa-user',
         ],
         [
-            'text' => 'change_password',
-            'url' => 'admin/settings',
-            'icon' => 'fas fa-fw fa-lock',
-        ],
-        [
-            'text' => 'multilevel',
-            'icon' => 'fas fa-fw fa-share',
-            'submenu' => [
-                [
-                    'text' => 'level_one',
-                    'url' => '#',
-                ],
-                [
-                    'text' => 'level_one',
-                    'url' => '#',
-                    'submenu' => [
-                        [
-                            'text' => 'level_two',
-                            'url' => '#',
-                        ],
-                        [
-                            'text' => 'level_two',
-                            'url' => '#',
-                            'submenu' => [
-                                [
-                                    'text' => 'level_three',
-                                    'url' => '#',
-                                ],
-                                [
-                                    'text' => 'level_three',
-                                    'url' => '#',
-                                ],
-                            ],
-                        ],
-                    ],
-                ],
-                [
-                    'text' => 'level_one',
-                    'url' => '#',
-                ],
-            ],
-        ],
-        ['header' => 'labels'],
-        [
-            'text' => 'important',
-            'icon_color' => 'red',
+            'text' => 'Users',
             'url' => '#',
+            'icon' => 'fas fa-fw fa-user',
         ],
         [
-            'text' => 'warning',
-            'icon_color' => 'yellow',
+            'text' => 'Roles',
             'url' => '#',
+            'icon' => 'fas fa-fw fa-user',
         ],
         [
-            'text' => 'information',
-            'icon_color' => 'cyan',
+            'text' => 'Permisos',
             'url' => '#',
+            'icon' => 'fas fa-fw fa-user',
         ],
+
+
+
+
+        ['header' => 'CONFIGURACIÓN DE CUENTA'],
+        [
+            'text' => 'profile',
+            'route' => 'usuario.profile.index',
+            'icon' => 'fas fa-fw fa-user',
+        ],
+
+
+
+        ['header' => 'ADMINISTRACION DE MAESTROS'],
+        [
+            'text' => 'Maestros',
+            'url' => '#',
+            'icon' => 'fas fa-fw fa-user',
+        ],
+
     ],
 
     /*
@@ -430,7 +416,7 @@ return [
 
     'plugins' => [
         'Datatables' => [
-            'active' => false,
+            'active' => true,
             'files' => [
                 [
                     'type' => 'js',
@@ -450,7 +436,7 @@ return [
             ],
         ],
         'Select2' => [
-            'active' => false,
+            'active' => true,
             'files' => [
                 [
                     'type' => 'js',
@@ -462,6 +448,23 @@ return [
                     'asset' => false,
                     'location' => '//cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.css',
                 ],
+
+                // Selec
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => 'vendor/select2/js/select2.full.min.js',
+                ],
+                [
+                    'type' => 'css',
+                    'asset' => true,
+                    'location' => 'vendor/select2/css/select2.min.css',
+                ],
+                [
+                    'type' => 'css',
+                    'asset' => true,
+                    'location' => 'vendor/select2-bootstrap4-theme/select2-bootstrap4.min.css',
+                ],                
             ],
         ],
         'Chartjs' => [
@@ -475,12 +478,12 @@ return [
             ],
         ],
         'Sweetalert2' => [
-            'active' => false,
+            'active' => true,
             'files' => [
                 [
                     'type' => 'js',
                     'asset' => false,
-                    'location' => '//cdn.jsdelivr.net/npm/sweetalert2@8',
+                    'location' => '//cdn.jsdelivr.net/npm/sweetalert2@11',
                 ],
             ],
         ],
@@ -499,6 +502,57 @@ return [
                 ],
             ],
         ],
+
+         // Para exportar botones 
+        /**
+         * php artisan adminlte:plugins install --plugin=datatablesPlugins
+         */
+        'DatatablesPlugins' => [
+            'active' => true,
+            'files' => [
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => 'vendor/datatables-plugins/buttons/js/dataTables.buttons.min.js',
+                ],
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => 'vendor/datatables-plugins/buttons/js/buttons.bootstrap4.min.js',
+                ],
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => 'vendor/datatables-plugins/buttons/js/buttons.html5.min.js',
+                ],
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => 'vendor/datatables-plugins/buttons/js/buttons.print.min.js',
+                ],
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => 'vendor/datatables-plugins/jszip/jszip.min.js',
+                ],
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => 'vendor/datatables-plugins/pdfmake/pdfmake.min.js',
+                ],
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => 'vendor/datatables-plugins/pdfmake/vfs_fonts.js',
+                ],
+                [
+                    'type' => 'css',
+                    'asset' => true,
+                    'location' => 'vendor/datatables-plugins/buttons/css/buttons.bootstrap4.min.css',
+                ],
+            ],
+        ],
+
     ],
 
     /*
@@ -546,5 +600,5 @@ return [
     |
     */
 
-    'livewire' => false,
+    'livewire' => true,
 ];

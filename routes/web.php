@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,4 +26,14 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
+
+    // Route::get('usuario/profile/',   [ProfileController::class, 'index'])->name('profile.user');
+    // Route::put('usuario/profile/',   [ProfileController::class, 'update'])->name('profile.update');
+
+    // route::resource('usuario/profile', ProfileController::class)->names('usuario.profile');
+    Route::resource('usuario/profile', ProfileController::class)
+    ->except(['create', 'store', 'show', 'edit', 'destroy'])
+    ->names('usuario.profile');
+
+
 });

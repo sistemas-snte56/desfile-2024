@@ -52,11 +52,57 @@
             </div>
         @endif
 
+
+        @php
+            $config = [
+                "title" => "Select multiple options...",
+                "liveSearch" => true,
+                "liveSearchPlaceholder" => "Search...",
+                "showTick" => true,
+                "actionsBox" => true,
+            ];
+        @endphp
+
+        {{-- Minimal --}}
+        
+
+
+        
+        
+        <!-- Cargo -->
+        <div class="col-span-6 sm:col-span-4">
+            <x-label for="cargo" value="{{ __('Delegación') }}" />
+            <x-adminlte-select2 name="sel2Basic" fgroup-class="col-md-12">
+                <option selected>Option 3</option>
+            </x-adminlte-select2>
+        </div>    
+
+        <!-- Cargo -->
+        <div class="col-span-6 sm:col-span-4">
+            <x-label for="cargo" value="{{ __('Cargo') }}" />
+            <x-input id="cargo" type="text" class="mt-1 block w-full" wire:model="state.cargo" required autocomplete="cargo" />
+            <x-input-error for="nombre" class="mt-2" />
+        </div>    
+
         <!-- Name -->
         <div class="col-span-6 sm:col-span-4">
-            <x-label for="name" value="{{ __('Name') }}" />
-            <x-input id="name" type="text" class="mt-1 block w-full" wire:model="state.name" required autocomplete="name" />
-            <x-input-error for="name" class="mt-2" />
+            <x-label for="nombre" value="{{ __('Nombre') }}" />
+            <x-input id="nombre" type="text" class="mt-1 block w-full" wire:model="state.nombre" required autocomplete="nombre" />
+            <x-input-error for="nombre" class="mt-2" />
+        </div>
+
+        <!-- Apellito Paterno -->
+        <div class="col-span-6 sm:col-span-4">
+            <x-label for="apaterno" value="{{ __('Apellido Paterno') }}" />
+            <x-input id="apaterno" type="text" class="mt-1 block w-full" wire:model="state.apaterno" required autocomplete="apaterno" />
+            <x-input-error for="apaterno" class="mt-2" />
+        </div>
+
+        <!-- Apellido Materno -->
+        <div class="col-span-6 sm:col-span-4">
+            <x-label for="amaterno" value="{{ __('Apellido Materno') }}" />
+            <x-input id="amaterno" type="text" class="mt-1 block w-full" wire:model="state.amaterno" required autocomplete="amaterno" />
+            <x-input-error for="amaterno" class="mt-2" />
         </div>
 
         <!-- Email -->

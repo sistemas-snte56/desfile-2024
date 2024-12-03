@@ -15,4 +15,9 @@ class Region extends Model
         'region',
         'sede',
     ];
+
+    public function delegations()
+    {
+        return $this->hasMany(Delegation::class, 'id_region');
+    }      
 }
