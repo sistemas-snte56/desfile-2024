@@ -345,17 +345,17 @@ return [
         ],
         [
             'text' => 'Users',
-            'url' => '#',
+            'route' => 'user.index',
             'icon' => 'fas fa-fw fa-user',
         ],
         [
             'text' => 'Roles',
-            'url' => '#',
+            'route' => 'role.index',
             'icon' => 'fas fa-fw fa-user',
         ],
         [
             'text' => 'Permisos',
-            'url' => '#',
+            'route' => 'permission.index',
             'icon' => 'fas fa-fw fa-user',
         ],
 

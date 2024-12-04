@@ -1,34 +1,29 @@
 @extends('adminlte::page')
 
-@section('title', 'Usuarios')
+@section('title', 'Roles')
 
 @section('content_header')
-    <h1>Usuarios</h1>
+    <h1>Roles</h1>
 @stop
 
 @section('content')
 <div class="card">
         <div class="card-header"style="background-color: #ee7a00;">
-            <h4 style="color:#FFFFFF;"><strong>LISTADO DE TODOS LOS USUARIOS</strong></h4>
+            <h4 style="color:#FFFFFF;"><strong>LISTADO DE TODOS LOS ROLES</strong></h4>
         </div>
         <div class="card-body">
             <div class="card-title mb-4">
-                    <a href=" {{route('user.create')}} " class="btn bg-primary float-right">
-                        <i class="fa fa-sm fa-fw fa-pen"></i> Nuevo user
+                    <a href=" {{route('role.create')}} " class="btn bg-primary float-right">
+                        <i class="fa fa-sm fa-fw fa-pen"></i> Nuevo role
                     </a>                
             </div>
             <div class="card-text">
                 {{-- Setup data for datatables --}}
                 @php
                     $heads = [
-                        'ID',
+                        ['label'=>'ID', 'width'=>8],
                         'NOMBRE',
-                        'A. PATERNO',
-                        'A. MATERNO',
-                        'DELEGACIÓN',
-                        'CORREO ELECTRÓNICO',
-                        'PERMISOS',
-                        ['label' => 'ACCIONES', 'no-export' => true, 'width' => 10],
+                        ['label' => 'ACCIONES', 'no-export' => true, 'width' => 22],
                     ];
                     $btnEdit = '<button class="btn btn-xs btn-default text-primary mx-1 shadow" title="Edit">
                                     <i class="fa fa-lg fa-fw fa-pen"></i>
@@ -45,18 +40,13 @@
                         'order' => [[0, 'asc']],
                         'columns' => [
                             ['orderable' => true], 
-                            ['orderable' => true], 
-                            ['orderable' => true], 
-                            ['orderable' => true], 
-                            ['orderable' => true], 
-                            ['orderable' => true], 
                             ['orderable' => false], 
                             ['orderable' => false], 
                         ],
                         'language' => [
                             'url' => 'https://cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json',
                         ],
-                        'pageLength' => 50, // Configuración por defecto de la cantidad de entradas por página
+                        'pageLength' => 10, // Configuración por defecto de la cantidad de entradas por página
                         'lengthMenu' => [50, 100, 200], // Opciones de entradas por página       
                         'responsive' => true,                 
                     ];
@@ -64,25 +54,18 @@
                 {{-- Minimal example / fill data using the component slot --}}
                 <x-adminlte-datatable id="table1" :heads="$heads"  :config="$config"  striped hoverable bordered compressed with-buttons>
 
-                    @foreach ($users as $user)
+                    @foreach ($roles as $role)
                         <tr>
-                            <td> {{$user->id}} </td>
-                            <td> {{$user->nombre}} </td>
-                            <td> {{$user->apaterno}} </td>
-                            <td> {{$user->amaterno}} </td>
-                            <td> {{$user->delegations->delegacion}} {{ $user->delegations->nivel_delegaciona }} </td>
-                            <td> {{$user->email}} </td>
-                            <td>  
-                                @foreach ($user->roles as $role)
-                                    <h5><span class="badge badge-primary">{{$role->name}} </span></h5>
-                                @endforeach
-                            </td>
+                            <td> {{$role->id}} </td>
+                            <td> {{$role->name}} </td>
                             <td>
-
-                                <a href="{{route('user.show',$user)}}" class="btn btn-success btn-sm" >
+                                <a href="{{route('role.show',$role)}}" class="btn btn-info btn-sm" >
+                                    Asignar Permisos
+                                </a>
+                                <a href="{{route('role.edit',$role)}}" class="btn btn-success btn-sm" >
                                     Editar
                                 </a>
-                                {!! Form::open(['route' => ['user.destroy',$user], 'method' => 'DELETE', 'class' => 'formEliminar', 'style' => 'display: inline']) !!}
+                                {!! Form::open(['route' => ['role.destroy',$role], 'method' => 'DELETE', 'class' => 'formEliminar', 'style' => 'display: inline']) !!}
                                     @csrf
                                     {!! Form::button('Eliminar', ['type' => 'submit', 'class' => 'btn btn-danger btn-sm']) !!}
                                 {!! Form::close() !!}
@@ -103,10 +86,10 @@
 @stop
 
 @section('js')
-    @if(session('success_user'))
+    @if(session('success_role'))
         <script>
             $(document).ready(function(){
-                let mensaje = "{{ session ('success_user') }}"
+                let mensaje = "{{ session ('success_role') }}"
                 Swal.fire({
                     icon: 'success',
                     title: mensaje,
@@ -116,6 +99,20 @@
             });
         </script>
     @endif     
+
+    @if(session('success_permissions'))
+        <script>
+            $(document).ready(function(){
+                let mensaje = "{{ session ('success_permissions') }}"
+                Swal.fire({
+                    icon: 'success',
+                    title: mensaje,
+                    text: 'Los permisos fueron asignados de forma satisfactoriamente.',
+                    showConfirmButton: true, 
+                });
+            });
+        </script>
+    @endif 
 
     <script>
         $(document).ready(function() {

@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Admin\Region;
 use Illuminate\Http\Request;
 use App\Models\Admin\Delegation;
+use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -18,26 +19,26 @@ class UserController extends Controller
     public function index()
     {
         /*
-        // Obtener el usuario autenticado
-        $user = Auth::user();
+            // Obtener el usuario autenticado
+            $user = Auth::user();
 
-        // Filtrar delegaciones que están asociadas al usuario autenticado
-        // (Asumiendo que tienes una relación con 'user_id' en la tabla 'delegacions')
-        $delegaciones = Delegation::where('user_id', $user->id)
-                                ->orderBy('nombre', 'asc')
-                                ->get();
+            // Filtrar delegaciones que están asociadas al usuario autenticado
+            // (Asumiendo que tienes una relación con 'user_id' en la tabla 'delegacions')
+            $delegaciones = Delegation::where('user_id', $user->id)
+                                    ->orderBy('nombre', 'asc')
+                                    ->get();
 
-        // Pasar las delegaciones a la vista        
-        $delegaciones = Delegation::orderBy('delegacion','asc')->get();
+            // Pasar las delegaciones a la vista        
+            $delegaciones = Delegation::orderBy('delegacion','asc')->get();
         */
 
-        $user = Auth::user();
+        $users = User::all();
 
         $regiones = Region::all();
         $delegaciones = Delegation::all();
 
         // return $user;
-        return view('admin.users.index', compact('user','regiones','delegaciones'));
+        return view('admin.users.index', compact('users','regiones','delegaciones'));
     }
 
     /**
@@ -61,7 +62,21 @@ class UserController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $user = User::find($id);
+        $allRoles = Role::all();
+        
+        $userRoles = $user->roles->pluck('id')->toArray();
+
+        $userRolesName = $user->roles->pluck('name')->toArray();
+
+        
+
+        $regiones = Region::all();
+        $delegaciones = Delegation::all();
+
+        // return $user;
+        return view('admin.users.show', compact('user','regiones','delegaciones','allRoles','userRoles','userRolesName'));
+
     }
 
     /**
@@ -77,11 +92,14 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
+
+
         $user = User::findOrFail($id);
 
         $request->validate([
             'select_delegacion' => ['required','numeric'],
             'select_cargo' => ['required','string'],
+            'selectRoles' => ['required'],
             'nombre' => ['required','string'],
             'apaterno' => ['required','string'],
             'amaterno' => ['required','string'],
@@ -108,6 +126,7 @@ class UserController extends Controller
             
         } 
 
+
         $user->id_delegacion = $request->input('select_delegacion');
         $user->cargo = $request->input('select_cargo');
         $user->nombre = $request->input('nombre');
@@ -115,9 +134,14 @@ class UserController extends Controller
         $user->amaterno = $request->input('amaterno');
         $user->email = $request->input('email');
         $user->save(); 
-        
+
+        $rolesIds = $request->input('selectRoles', []);
+        $roles = Role::whereIn('id',$rolesIds)->pluck('name');
+        $user->syncRoles($roles);
+
+
         // Redireccionar con mensaje de éxito
-        return redirect()->route('admin.user.index')->with('success', 'Información actualizada.');
+        return redirect()->route('user.index')->with('success', 'Información actualizada.');
     }
 
     /**

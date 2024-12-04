@@ -1,125 +1,50 @@
 @extends('adminlte::page')
 
-@section('title', 'Usuario')
+@section('title', 'Dashboard')
 
 @section('content_header')
-    <h2 >
-        <strong class="font-semibold text-xl text-gray-800 leading-tight">
-            Usuario
-        </strong> 
-    </h2>
+    <h1>Dashboard</h1>
 @stop
 
 @section('content')
+    <div class="card">
+        <div class="card-body">
 
-
-    <form action="{{ route('usuario.profile.update',$user) }}" method="POST">
-        @method('PUT') <!-- Esto genera el error -->
-        @csrf        
-        
-        <div class="row justify-content-center">
-            <div class="col-3 px-4 sm:px-0">
-                <h3 class="text-lg font-medium text-gray-900">Información de perfil</h3>
-        
-                <p class="mt-1 text-sm text-gray-600">
-                    Actualice la información de su cuenta y la dirección de correo electrónico.
-                </p>
-            </div>
-
-            <div class="col-4">
-                <div class="card">
-                    <div class="card-body">
-
-                        @php
-                        $config = [
-                            "title" => "Select multiple options...",
-                            "liveSearch" => true,
-                            "liveSearchPlaceholder" => "Search...",
-                            "showTick" => true,
-                            "actionsBox" => true,
-                            ];
-                        @endphp
+            @php
+            $heads = [
+                'ID',
+                'Name',
+                ['label' => 'Phone', 'width' => 40],
+                ['label' => 'Actions', 'no-export' => true, 'width' => 5],
+            ];
             
-                        {{-- Minimal --}}
-                        <x-adminlte-select2 name="select_region" label="Región" fgroup-class="col-md-12" >
-                            <option selected>{{ $user->delegations->region->region}} - {{$user->delegations->region->sede}}</option>
-                            @foreach ($regiones as $reg)
-                                <option value="">{{$reg->region}} - {{$reg->sede}}</option>
-                            @endforeach
-                        </x-adminlte-select2>
+            $btnEdit = '<button class="btn btn-xs btn-default text-primary mx-1 shadow" title="Edit">
+                            <i class="fa fa-lg fa-fw fa-pen"></i>
+                        </button>';
+            $btnDelete = '<button class="btn btn-xs btn-default text-danger mx-1 shadow" title="Delete">
+                              <i class="fa fa-lg fa-fw fa-trash"></i>
+                          </button>';
+            $btnDetails = '<button class="btn btn-xs btn-default text-teal mx-1 shadow" title="Details">
+                               <i class="fa fa-lg fa-fw fa-eye"></i>
+                           </button>';
+            
+            $config = [
+                'data' => [
+                    [22, 'John Bender', '+02 (123) 123456789', '<nobr>'.$btnEdit.$btnDelete.$btnDetails.'</nobr>'],
+                    [19, 'Sophia Clemens', '+99 (987) 987654321', '<nobr>'.$btnEdit.$btnDelete.$btnDetails.'</nobr>'],
+                    [3, 'Peter Sousa', '+69 (555) 12367345243', '<nobr>'.$btnEdit.$btnDelete.$btnDetails.'</nobr>'],
+                ],
+                'order' => [[1, 'asc']],
+                'columns' => [null, null, null, ['orderable' => false]],
+            ];
+            @endphp
 
-                        <x-adminlte-select2 name="select_delegacion" id="select_delegacion" label="Delegacion" fgroup-class="col-md-12" >
-                            <option value="{{$user->delegations->id}}" selected>{{$user->delegations->delegacion}} / {{$user->delegations->nivel_delegaciona}} / {{$user->delegations->sede_delegaciona}}</option>
-                            @foreach ($delegaciones as $deleg)
-                                <option value="{{$deleg->id}}">{{$deleg->delegacion}} / {{$deleg->nivel_delegaciona}} / {{$deleg->sede_delegaciona}}</option>
-                            @endforeach
-                        </x-adminlte-select2>                        
+            <x-adminlte-datatable id="table8" :heads="$heads" head-theme="dark" class="bg-teal" :config="$config"
+            striped hoverable with-buttons/>
 
-                        <x-adminlte-select-bs name="select_cargo" id="select_cargo" label="Cargo"  fgroup-class="col-md-12" >
-                            <option value="{{$user->cargo}}" selected>{{$user->cargo}}</option>
-                            <option value="SECRETARIO GENERAL">SECRETARIO GENERAL</option>
-                            <option value="SECRETARIA GENERAL">SECRETARIA GENERAL</option>
-                            <option value="REPRESENTANTE DE CENTRO DE TRABAJO">REPRESENTANTE DE CENTRO DE TRABAJO</option>
-                        </x-adminlte-select-bs>                            
-
-
-                        <x-adminlte-input name="nombre" id="nombre" label="Nombre" 
-                            fgroup-class="col-md-12"  value="{{$user->nombre}}" />
-
-                        <x-adminlte-input name="apaterno" label="Apellido paterno" 
-                            fgroup-class="col-md-12"  value="{{$user->apaterno}}" />
-                    
-                        <x-adminlte-input name="amaterno" label="Apellido materno" 
-                            fgroup-class="col-md-12"  value="{{$user->amaterno}}" />
-                    
-                        <x-adminlte-input name="email" label="Apellido materno" 
-                            fgroup-class="col-md-12"  value="{{$user->email}}" />
-                    </div>
-                </div>
-            </div>
         </div>
-
-        <hr>
-
-        <div class="row justify-content-center">
-            <div class="col-3 px-4 sm:px-0">
-                <h3 class="text-lg font-medium text-gray-900"> Actualizar contraseña</h3>
-        
-                <p class="mt-1 text-sm text-gray-600">
-                    Asegúrese que su cuenta esté usando una contraseña larga y aleatoria para mantenerse seguro.
-                </p>
-            </div>        
-
-            <div class="col-4">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="row">
-
-                            <!-- Contraseña Actual -->
-                            <x-adminlte-input name="current_password" label="Contraseña Actual" type="password" placeholder="Introduce tu contraseña actual" fgroup-class="col-md-12"/>
-
-                            <!-- Nueva Contraseña -->
-                            <x-adminlte-input name="new_password" label="Nueva Contraseña" type="password" placeholder="Introduce la nueva contraseña" fgroup-class="col-md-12"/>
-
-                            <!-- Confirmar Contraseña -->
-                            <x-adminlte-input name="new_password_confirmation" label="Confirmar Contraseña" type="password" placeholder="Confirma la nueva contraseña" fgroup-class="col-md-12"/>
-                                                                                   
-                        </div>                            
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-12 text-center">
-                <div class="form-group">
-                    <button type="submit" class="btn btn-primary">Actualizar Contraseña</button>
-                </div>                 
-            </div>
-        </div>
-    </form>
-    
+    </div>
 @stop
-
-
 
 @section('css')
     {{-- Add here extra stylesheets --}}
@@ -127,17 +52,5 @@
 @stop
 
 @section('js')
-    @if(session('success'))
-        <script>
-            $(document).ready(function(){
-                let mensaje = "{{ session ('success') }}"
-                Swal.fire({
-                    icon: 'success',
-                    title: mensaje,
-                    text: 'Los datos que registraste se guardaron satisfactoriamente.',
-                    showConfirmButton: true,
-                });
-            });
-        </script>
-    @endif     
+    <script> console.log("Hi, I'm using the Laravel-AdminLTE package!"); </script>
 @stop
