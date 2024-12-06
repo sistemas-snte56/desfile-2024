@@ -364,8 +364,8 @@ return [
 
         ['header' => 'CONFIGURACIÓN DE CUENTA'],
         [
-            'text' => 'profile',
-            'route' => 'usuario.profile.index',
+            'text' => 'Mis datos',
+            'route' => 'usuario.index',
             'icon' => 'fas fa-fw fa-user',
         ],
 

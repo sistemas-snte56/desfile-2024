@@ -58,7 +58,8 @@ class RoleController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $role = Role::find($id);
+        return view('admin.roles.edit',compact('role'));
     }
 
     /**

@@ -25,17 +25,7 @@
                         'NOMBRE',
                         ['label' => 'ACCIONES', 'no-export' => true, 'width' => 22],
                     ];
-                    $btnEdit = '<button class="btn btn-xs btn-default text-primary mx-1 shadow" title="Edit">
-                                    <i class="fa fa-lg fa-fw fa-pen"></i>
-                                </button>';
-                    $btnDelete = '<button type="submit" class="btn btn-xs btn-default text-danger mx-1 shadow" title="Eliminar">
-                                    <i class="fa fa-lg fa-fw fa-trash"></i>
-                                </button>';                                
-                    $btnDetails = '<button class="btn btn-xs btn-default text-teal mx-1 shadow" title="Details">
-                                    <i class="fa fa-lg fa-fw fa-eye"></i>
-                                </button>';
-
-
+                    
                     $config = [
                         'order' => [[0, 'asc']],
                         'columns' => [
