@@ -50,11 +50,11 @@
                             <td> {{$permission->id}} </td>
                             <td> {{$permission->name}} </td>
                             <td>
-                                <a href="#" class="btn btn-success btn-sm" >
+                                <a href="{{route('permission.edit',$permission)}}" class="btn btn-success btn-sm" >
                                     Editar
                                 </a>
 
-                                {!! Form::open(['url' => '#', 'method' => 'DELETE', 'class' => 'formEliminar', 'style' => 'display: inline']) !!}
+                                {!! Form::open(['route' => ['permission.destroy',$permission], 'method' => 'DELETE', 'class' => 'formEliminar', 'style' => 'display: inline']) !!}
                                     @csrf
                                     {!! Form::button('Eliminar', ['type' => 'submit', 'class' => 'btn btn-danger btn-sm']) !!}
                                 {!! Form::close() !!}
@@ -83,6 +83,33 @@
                     icon: 'success',
                     title: mensaje,
                     text: 'El permiso que registraste se guardo satisfactoriamente.',
+                    showConfirmButton: true,
+                });
+            });
+        </script>
+    @endif     
+    @if(session('update_permission'))
+        <script>
+            $(document).ready(function(){
+                let mensaje = "{{ session ('update_permission') }}"
+                Swal.fire({
+                    icon: 'success',
+                    title: mensaje,
+                    text: 'El permiso que registraste se actualizo satisfactoriamente.',
+                    showConfirmButton: true,
+                });
+            });
+        </script>
+    @endif     
+
+    @if(session('destroy_permission'))
+        <script>
+            $(document).ready(function(){
+                let mensaje = "{{ session ('destroy_permission') }}"
+                Swal.fire({
+                    icon: 'success',
+                    title: mensaje,
+                    text: 'El permiso fue eliminado satisfactoriamente.',
                     showConfirmButton: true,
                 });
             });

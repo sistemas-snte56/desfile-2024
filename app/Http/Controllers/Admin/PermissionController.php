@@ -8,6 +8,28 @@ use Spatie\Permission\Models\Permission;
 
 class PermissionController extends Controller
 {
+
+    public function __construct()
+    {
+        // Verificar si el usuario tiene permiso para ver todos los recursos (index)
+        $this->middleware('permission:permission.index')->only('index');
+
+        // Verificar si el usuario tiene permiso para ver un recurso específico (show)
+        $this->middleware('permission:permission.show')->only('show');
+
+        // Verificar si el usuario tiene permiso para editar un recurso (edit, update)
+        $this->middleware('permission:permission.edit')->only('edit', 'update');
+
+        // Verificar si el usuario tiene permiso para eliminar un recurso (destroy)
+        $this->middleware('permission:permission.destroy')->only('destroy');
+
+        // Verificar si el usuario tiene permiso para crear un recurso (create, store)
+        $this->middleware('permission:permission.create')->only('create', 'store');
+    }
+
+
+
+
     /**
      * Display a listing of the resource.
      */
@@ -34,8 +56,11 @@ class PermissionController extends Controller
             'name' => ['required','string'],
         ]);
 
-        $permission = Permission::create(['name' => $request->input('name')]);
-        return redirect()->route('permission.index')->with('success_permission','Registro Guardado');
+        $permission = Permission::create([
+            'name' => $request->input('name'),
+            'guard_name' => 'web',  // Especificamos el guard_name manualmente
+        ]);
+        return redirect()->route('permission.index')->with('success_permission','Permisso Guardado');
     }
 
     /**
@@ -51,7 +76,8 @@ class PermissionController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $permission = Permission::find($id);
+        return view('admin.permissions.edit',compact('permission'));
     }
 
     /**
@@ -59,7 +85,18 @@ class PermissionController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        // Buscar el permiso por su ID
+        $permission = Permission::find($id);
+
+        $request->validate([
+            'name' => ['required','string'],
+        ]);
+
+        $permission->update([
+            'name' => $request->input('name'),
+            'guard_name' => 'web',  // Especificamos el guard_name manualmente
+        ]);
+        return redirect()->route('permission.index')->with('update_permission','Permisso Actualizado');
     }
 
     /**
@@ -67,6 +104,8 @@ class PermissionController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $permission = Permission::find($id);
+        $permission->delete();
+        return redirect()->route('permission.index')->with('destroy_permission','Permisso Borrado');
     }
 }

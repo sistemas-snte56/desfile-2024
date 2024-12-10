@@ -331,32 +331,40 @@ return [
 
 
         // Configuración Super Administrador
-        ['header' => 'CONFIGURACIÓN GENERAL'],
+        [
+            'header' => 'CONFIGURACIÓN GENERAL',
+            'can' => 'admin.dashboard'
+        ],
         [
             'text' => 'Regiones',
             'url' => '#',
             'icon' => 'fas fa-fw fa-user',
+            'can' => 'region.index'
         ],
 
         [
             'text' => 'Delegaciones',
             'url' => '#',
             'icon' => 'fas fa-fw fa-user',
+            'can' => 'delegacion.index'
         ],
         [
             'text' => 'Users',
             'route' => 'user.index',
             'icon' => 'fas fa-fw fa-user',
+            'can' => 'user.index'
         ],
         [
             'text' => 'Roles',
             'route' => 'role.index',
             'icon' => 'fas fa-fw fa-user',
+            'can' => 'role.index'
         ],
         [
             'text' => 'Permisos',
             'route' => 'permission.index',
             'icon' => 'fas fa-fw fa-user',
+            'can' => 'permission.index'
         ],
 
 
