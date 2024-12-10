@@ -35,6 +35,8 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     Route::prefix('admin')->middleware('role:Administrador')->group(function () {
         Route::resource('/', AdminController::class)->names('admin');
         Route::resource('/role', RoleController::class)->names('role');
+        Route::put('/role/{id}/updateRolePermission', [RoleController::class, 'updateRolePermission'])->name('role.updateRolePermission');
+
         Route::resource('/permission', PermissionController::class)->names('permission');
         Route::resource('/user', UserController::class)->names('user'); 
     });

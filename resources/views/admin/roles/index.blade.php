@@ -88,6 +88,34 @@
                 });
             });
         </script>
+    @endif   
+
+    @if(session('update_role'))
+        <script>
+            $(document).ready(function(){
+                let mensaje = "{{ session ('success_role') }}"
+                Swal.fire({
+                    icon: 'success',
+                    title: mensaje,
+                    text: 'El rol se ha actualizado satisfactoriamente.',
+                    showConfirmButton: true,
+                });
+            });
+        </script>
+    @endif   
+
+    @if(session('destroy_role'))
+        <script>
+            $(document).ready(function(){
+                let mensaje = "{{ session ('destroy_role') }}"
+                Swal.fire({
+                    icon: 'success',
+                    title: mensaje,
+                    text: 'El rol que ha borrado satisfactoriamente.',
+                    showConfirmButton: true,
+                });
+            });
+        </script>
     @endif     
 
     @if(session('success_permissions'))

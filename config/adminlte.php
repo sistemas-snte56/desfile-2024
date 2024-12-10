@@ -318,7 +318,7 @@ return [
         [
             'text' => 'blog',
             'url' => 'admin/blog',
-            'can' => 'manage-blog',
+            // 'can' => 'manage-blog',
         ],
         [
             'text' => 'pages',
@@ -333,38 +333,38 @@ return [
         // Configuración Super Administrador
         [
             'header' => 'CONFIGURACIÓN GENERAL',
-            'can' => 'admin.dashboard'
+            // 'can' => 'admin.dashboard'
         ],
         [
             'text' => 'Regiones',
             'url' => '#',
             'icon' => 'fas fa-fw fa-user',
-            'can' => 'region.index'
+            // 'can' => 'region.index'
         ],
 
         [
             'text' => 'Delegaciones',
             'url' => '#',
             'icon' => 'fas fa-fw fa-user',
-            'can' => 'delegacion.index'
+            // 'can' => 'delegacion.index'
         ],
         [
             'text' => 'Users',
             'route' => 'user.index',
             'icon' => 'fas fa-fw fa-user',
-            'can' => 'user.index'
+            // 'can' => 'user.index'
         ],
         [
             'text' => 'Roles',
             'route' => 'role.index',
             'icon' => 'fas fa-fw fa-user',
-            'can' => 'role.index'
+            // 'can' => 'role.index'
         ],
         [
             'text' => 'Permisos',
             'route' => 'permission.index',
             'icon' => 'fas fa-fw fa-user',
-            'can' => 'permission.index'
+            // 'can' => 'permission.index'
         ],
 
 

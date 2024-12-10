@@ -19,7 +19,7 @@
                 </div>               
             </div>
             <div class="card-text">
-                {!! Form::open(['route'=>['role.update',$role],'method'=>'POST']) !!}
+                {!! Form::open(['route'=>['role.update',$role],'method'=>'PUT']) !!}
                     @csrf
                     <div class="row">
                         <x-adminlte-input name="name"  placeholder="Cambia el nombre" label-class="text-orange" label="Cambia el nombre" type="text" fgroup-class="col-md-12" :value="old('name',$role->name)" />

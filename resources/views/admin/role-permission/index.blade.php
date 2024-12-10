@@ -19,7 +19,7 @@
                 </div>               
             </div>
             <div class="card-text">
-                {!! Form::open(['route'=> ['role.update',$role],'method'=>'POST']) !!}
+                {!! Form::open(['route'=> ['role.updateRolePermission',$role],'method'=>'POST']) !!}
                     @csrf
                     @method("PUT")
                     {{-- <div class="row">

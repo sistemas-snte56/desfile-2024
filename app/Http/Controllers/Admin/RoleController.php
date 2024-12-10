@@ -37,8 +37,11 @@ class RoleController extends Controller
         $request->validate([
             'name' => ['required','string'],
         ]);
-
-        $role = Role::create(['name' => $request->input('name')]);
+        
+        $role = Role::create([
+            'name' => $request->input('name'),
+            'guard_name' => 'web',  // Especificamos el guard_name manualmente
+        ]);
         return redirect()->route('role.index')->with('success_role','Registro Guardado');
     }
 
@@ -51,6 +54,24 @@ class RoleController extends Controller
         $permissions = Permission::all();
         $rolePermissions = $role->permissions->pluck('id')->toArray();
         return view('admin.role-permission.index',compact('role','permissions','rolePermissions'));
+    }
+
+    public function updateRolePermission(Request $request, string $id)
+    {
+        // 'aqui se actualiza los permissos asignados a roles';
+
+        $request->validate([
+            'selectPermissions' => ['required'],
+        ]);
+
+        $role = Role::find($id);
+        $permissionsIds = $request->input('selectPermissions');
+
+        $permissions = Permission::whereIn('id',$permissionsIds)->pluck('name')->toArray();
+
+        $role->syncPermissions($permissions);
+        return redirect()->route('role.index')->with('success_permissions','Se asignaron permisos.');
+
     }
 
     /**
@@ -67,18 +88,20 @@ class RoleController extends Controller
      */
     public function update(Request $request, string $id)
     {
+
+        // Buscar el permiso por su ID
+        $role = Role::find($id);
+
         $request->validate([
-            'selectPermissions' => ['required'],
+            'name' => ['required','string'],
         ]);
 
-        $role = Role::find($id);
-        $permissionsIds = $request->input('selectPermissions');
+        $role->update([
+            'name' => $request->input('name'),
+            'guard_name' => 'web',  // Especificamos el guard_name manualmente
+        ]);
 
-        $permissions = Permission::whereIn('id',$permissionsIds)->pluck('name')->toArray();
-
-        $role->syncPermissions($permissions);
-        return redirect()->route('role.index')->with('success_permissions','Se asignaron permisos.');
-        return redirect()->route('role.index')->with('success_role','Registro Guardado');
+        return redirect()->route('role.index')->with('update_role','Role Actualizado');
        
     }
 
@@ -87,6 +110,8 @@ class RoleController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $role = Role::find($id);
+        $role->delete();
+        return redirect()->route('role.index')->with('destroy_role','Role Borrado');
     }
 }
