@@ -370,26 +370,22 @@ return [
 
 
 
-        ['header' => 'COORDINADOR'],
+        ['header' => 'COORDINADOR', 'can' => 'coordinador.dashboard'],
             [
                 'text' => 'Coordinador',
-                'url' => '#',
+                'route' => 'coordinador.index',
                 'icon' => 'fas fa-fw fa-user',
                 'can' => 'coordinador.index',
             ],
 
-        ['header' => 'USUARIO'],
+        ['header' => 'USUARIO', 'can'=>'usuario.dashboard'],
             [
-                'text' => 'Mis datos',
+                'text' => 'Dashboard',
                 'route' => 'usuario.index',
-                'icon' => 'fas fa-fw fa-user',
+                'icon' => 'fas fa-fw fa-home',
                 'can' => 'usuario.index',
             ],
-            [
-                'text' => 'Maestros',
-                'url' => '#',
-                'icon' => 'fas fa-fw fa-user',
-            ],
+            
 
         
 

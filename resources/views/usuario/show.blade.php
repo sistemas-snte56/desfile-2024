@@ -13,10 +13,9 @@
 @section('content')
 
 
-    <form action="{{ route('usuario.update',$user) }}" method="POST">
-        @method('PUT') <!-- Esto genera el error -->
+    <form action="{{ route('usuario.update',$user->id) }}" method="post">
         @csrf        
-        
+        @method('PUT')
         <div class="row justify-content-center">
             <div class="col-3 px-4 sm:px-0">
                 <h3 class="text-lg font-medium text-gray-900">Información de perfil</h3>

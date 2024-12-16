@@ -44,7 +44,11 @@ class UsuarioController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $user = Auth::user();
+        $regiones = Region::all();
+        $delegaciones = Delegation::all();
+
+        return view('usuario.show', compact('user','regiones','delegaciones'));
     }
 
     /**
@@ -64,6 +68,7 @@ class UsuarioController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        
         $user = User::findOrFail($id);
 
         $request->validate([
