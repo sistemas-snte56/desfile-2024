@@ -9,23 +9,23 @@ use Spatie\Permission\Models\Permission;
 class PermissionController extends Controller
 {
 
-    public function __construct()
-    {
-        // Verificar si el usuario tiene permiso para ver todos los recursos (index)
-        $this->middleware('permission:permission.index')->only('index');
+    // public function __construct()
+    // {
+    //     // Verificar si el usuario tiene permiso para ver todos los recursos (index)
+    //     $this->middleware('permission:permission.index')->only('index');
 
-        // Verificar si el usuario tiene permiso para ver un recurso específico (show)
-        $this->middleware('permission:permission.show')->only('show');
+    //     // Verificar si el usuario tiene permiso para ver un recurso específico (show)
+    //     $this->middleware('permission:permission.show')->only('show');
 
-        // Verificar si el usuario tiene permiso para editar un recurso (edit, update)
-        $this->middleware('permission:permission.edit')->only('edit', 'update');
+    //     // Verificar si el usuario tiene permiso para editar un recurso (edit, update)
+    //     $this->middleware('permission:permission.edit')->only('edit', 'update');
 
-        // Verificar si el usuario tiene permiso para eliminar un recurso (destroy)
-        $this->middleware('permission:permission.destroy')->only('destroy');
+    //     // Verificar si el usuario tiene permiso para eliminar un recurso (destroy)
+    //     $this->middleware('permission:permission.destroy')->only('destroy');
 
-        // Verificar si el usuario tiene permiso para crear un recurso (create, store)
-        $this->middleware('permission:permission.create')->only('create', 'store');
-    }
+    //     // Verificar si el usuario tiene permiso para crear un recurso (create, store)
+    //     $this->middleware('permission:permission.create')->only('create', 'store');
+    // }
 
 
 

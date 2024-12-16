@@ -141,7 +141,7 @@ class UserController extends Controller
 
 
         // Redireccionar con mensaje de éxito
-        return redirect()->route('user.index')->with('success', 'Información actualizada.');
+        return redirect()->route('user.index')->with('success_user', 'Información actualizada.');
     }
 
     /**

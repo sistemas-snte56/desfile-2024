@@ -27,7 +27,7 @@
                         'A. MATERNO',
                         'DELEGACIÓN',
                         'CORREO ELECTRÓNICO',
-                        'PERMISOS',
+                        'ROL',
                         ['label' => 'ACCIONES', 'no-export' => true, 'width' => 10],
                     ];
                     $btnEdit = '<button class="btn btn-xs btn-default text-primary mx-1 shadow" title="Edit">
@@ -110,7 +110,7 @@
                 Swal.fire({
                     icon: 'success',
                     title: mensaje,
-                    text: 'El rol que registraste se guardo satisfactoriamente.',
+                    text: 'Se asigno rol de forma satisfactoria.',
                     showConfirmButton: true,
                 });
             });

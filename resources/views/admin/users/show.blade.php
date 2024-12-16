@@ -5,11 +5,8 @@
 @section('content_header')
     <h2 >
         <strong class="font-semibold text-xl text-gray-800 leading-tight">
-            Usuario 2
+            Usuario
         </strong> 
-
-        
-        
     </h2>
     
     <div style="margin-right:0px;" class="mt-3">

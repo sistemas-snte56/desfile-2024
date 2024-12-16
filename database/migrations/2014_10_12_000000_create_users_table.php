@@ -35,6 +35,7 @@ return new class extends Migration
             $table->string('amaterno')->nullable();;
             $table->string('email')->unique();
             $table->boolean('status_lista')->default(false);
+            $table->boolean('coordinador')->default(false);
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

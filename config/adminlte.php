@@ -318,7 +318,7 @@ return [
         [
             'text' => 'blog',
             'url' => 'admin/blog',
-            // 'can' => 'manage-blog',
+            'can' => 'manage-blog',
         ],
         [
             'text' => 'pages',
@@ -326,65 +326,74 @@ return [
             'icon' => 'far fa-fw fa-file',
             'label' => 4,
             'label_color' => 'success',
+            'can' => 'manage-blog',
         ],
 
 
 
         // Configuración Super Administrador
         [
-            'header' => 'CONFIGURACIÓN GENERAL',
-            // 'can' => 'admin.dashboard'
+            'header' => 'ADMINISTRADOR',
+            'can' => 'admin.dashboard'
         ],
-        [
-            'text' => 'Regiones',
-            'url' => '#',
-            'icon' => 'fas fa-fw fa-user',
-            // 'can' => 'region.index'
-        ],
+            [
+                'text' => 'Regiones',
+                'url' => '#',
+                'icon' => 'fas fa-fw fa-user',
+                'can' => 'region.index'
+            ],
 
-        [
-            'text' => 'Delegaciones',
-            'url' => '#',
-            'icon' => 'fas fa-fw fa-user',
-            // 'can' => 'delegacion.index'
-        ],
-        [
-            'text' => 'Users',
-            'route' => 'user.index',
-            'icon' => 'fas fa-fw fa-user',
-            // 'can' => 'user.index'
-        ],
-        [
-            'text' => 'Roles',
-            'route' => 'role.index',
-            'icon' => 'fas fa-fw fa-user',
-            // 'can' => 'role.index'
-        ],
-        [
-            'text' => 'Permisos',
-            'route' => 'permission.index',
-            'icon' => 'fas fa-fw fa-user',
-            // 'can' => 'permission.index'
-        ],
-
-
-
-
-        ['header' => 'CONFIGURACIÓN DE CUENTA'],
-        [
-            'text' => 'Mis datos',
-            'route' => 'usuario.index',
-            'icon' => 'fas fa-fw fa-user',
-        ],
+            [
+                'text' => 'Delegaciones',
+                'url' => '#',
+                'icon' => 'fas fa-fw fa-user',
+                'can' => 'delegacion.index'
+            ],
+            [
+                'text' => 'Users',
+                'route' => 'user.index',
+                'icon' => 'fas fa-fw fa-user',
+                'can' => 'user.index'
+            ],
+            [
+                'text' => 'Roles',
+                'route' => 'role.index',
+                'icon' => 'fas fa-fw fa-user',
+                'can' => 'role.index'
+            ],
+            [
+                'text' => 'Permisos',
+                'route' => 'permission.index',
+                'icon' => 'fas fa-fw fa-user',
+                'can' => 'permission.index',
+            ],
 
 
 
-        ['header' => 'ADMINISTRACION DE MAESTROS'],
-        [
-            'text' => 'Maestros',
-            'url' => '#',
-            'icon' => 'fas fa-fw fa-user',
-        ],
+        ['header' => 'COORDINADOR'],
+            [
+                'text' => 'Coordinador',
+                'url' => '#',
+                'icon' => 'fas fa-fw fa-user',
+                'can' => 'coordinador.index',
+            ],
+
+        ['header' => 'USUARIO'],
+            [
+                'text' => 'Mis datos',
+                'route' => 'usuario.index',
+                'icon' => 'fas fa-fw fa-user',
+                'can' => 'usuario.index',
+            ],
+            [
+                'text' => 'Maestros',
+                'url' => '#',
+                'icon' => 'fas fa-fw fa-user',
+            ],
+
+        
+
+
 
     ],
 

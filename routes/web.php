@@ -23,6 +23,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/enlinea', function()
+{
+    return view('enlinea');
+});
+
 
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
 
