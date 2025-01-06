@@ -329,8 +329,6 @@ return [
             'can' => 'manage-blog',
         ],
 
-
-
         // Configuración Super Administrador
         [
             'header' => 'ADMINISTRADOR',
@@ -338,11 +336,10 @@ return [
         ],
             [
                 'text' => 'Regiones',
-                'url' => '#',
+                'route' => 'region.index',
                 'icon' => 'fas fa-fw fa-user',
                 'can' => 'region.index'
             ],
-
             [
                 'text' => 'Delegaciones',
                 'url' => '#',
@@ -367,9 +364,6 @@ return [
                 'icon' => 'fas fa-fw fa-user',
                 'can' => 'permission.index',
             ],
-
-
-
         ['header' => 'COORDINADOR', 'can' => 'coordinador.dashboard'],
             [
                 'text' => 'Coordinador',
@@ -377,7 +371,6 @@ return [
                 'icon' => 'fas fa-fw fa-user',
                 'can' => 'coordinador.index',
             ],
-
         ['header' => 'USUARIO', 'can'=>'usuario.dashboard'],
             [
                 'text' => 'Dashboard',
@@ -385,12 +378,6 @@ return [
                 'icon' => 'fas fa-fw fa-home',
                 'can' => 'usuario.index',
             ],
-            
-
-        
-
-
-
     ],
 
     /*

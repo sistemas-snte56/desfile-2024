@@ -53,6 +53,8 @@
 			<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
 
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     </head>
 	
 	<body>
@@ -124,7 +126,7 @@
 			                    <li class="scroll"><a href="#explore">explore</a></li>
 			                    <li class="scroll"><a href="#reviews">review</a></li>
 			                    <li class="scroll"><a href="#blog">blog</a></li>
-			                    <li class="scroll"><a href="#contact">contact</a></li>
+			                    <li class="scroll"><a href="#contact">BUSCAR</a></li>
 			                </ul><!--/.nav -->
 			            </div><!-- /.navbar-collapse -->
 			        </div><!--/.container-->
@@ -139,30 +141,7 @@
 		<!--welcome-hero start -->
 		<section id="home" class="welcome-hero">
 			<div class="container">
-				<div class="welcome-hero-txt">
-					<h2>best place to find and explore <br> that all you need </h2>
-					<p>
-						Find Best Place, Restaurant, Hotel, Real State and many more think in just One click 
-					</p>
-				</div>
-				<div class="welcome-hero-serch-box">
-					<div class="welcome-hero-form">
-						<div class="single-welcome-hero-form">
-							<h3>what?</h3>
-							<form action="index.html">
-								<input type="text" placeholder="Ex: palce, resturent, food, automobile" />
-							</form>
-							<div class="welcome-hero-form-icon">
-								<i class="flaticon-list-with-dots"></i>
-							</div>
-						</div>
-					</div>
-					<div class="welcome-hero-serch">
-						<button class="welcome-hero-btn" onclick="window.location.href='#'">
-							 Buscar  <i data-feather="search"></i> 
-						</button>
-					</div>
-				</div>
+
 			</div>
 
 		</section><!--/.welcome-hero-->
@@ -1024,10 +1003,12 @@
 					<div class="col-sm-12">
 						<div class="subscription-input-group">
 							<form action="#">
-								<input type="email" class="subscription-input-form" placeholder="Enter your email here">
-								<button class="appsLand-btn subscribe-btn" onclick="window.location.href='#'">
-									creat account
-								</button>
+								<input type="numeric" class="subscription-input-form" placeholder="Enter your email here">
+								<button class="appsLand-btn subscribe-btn" id="mostrarAlerta">
+									Mostrar alerta
+								</button>								
+
+								
 							</form>
 						</div>
 					</div>	
@@ -1061,18 +1042,15 @@
 				</div>
 				<div class="hm-footer-copyright">
 					<div class="row">
-						<div class="col-sm-5">
+						<div class="col-sm-7">
 							<p>
-								&copy;copyright. designed and developed by <a href="https://www.themesine.com/">themesine</a>
+								&copy;copyright. 2024 SNTE. Todos los derechos reservados <a href="https://www.themesine.com/">www.<strong>snte</strong>.org.mx/<strong>seccion56</strong></a>
 							</p><!--/p-->
 						</div>
-						<div class="col-sm-7">
+						<div class="col-sm-5">
 							<div class="footer-social">
-								<span><i class="fa fa-phone"> +1  (222) 777 8888</i></span>
-								<a href="#"><i class="fa fa-facebook"></i></a>	
-								<a href="#"><i class="fa fa-twitter"></i></a>
-								<a href="#"><i class="fa fa-linkedin"></i></a>
-								<a href="#"><i class="fa fa-google-plus"></i></a>
+								<a href="https://www.facebook.com/snte56informafanpage/" target="_blank" rel="noopener noreferrer"><i class="fa fa-facebook"></i></a>
+								<a href="https://x.com/snte56veracruz" target="_blank" rel="noopener noreferrer"><i class="fa fa-twitter"></i></a>
 							</div>
 						</div>
 					</div>
@@ -1117,6 +1095,38 @@
 		     
         <!--Custom JS-->
         <script src="assets/js/custom.js"></script>
+
+		<script>
+			// Cuando el botón es presionado
+			document.getElementById('mostrarAlerta').addEventListener('click', function() {
+				Swal.fire({
+					title: '¿Estás seguro?',
+					text: 'Este es un ejemplo de alerta con un botón personalizado.',
+					icon: 'warning',
+					showCancelButton: true, // Muestra el botón "Cancelar"
+					confirmButtonText: 'Sí, confirmo', // Botón de confirmación
+					cancelButtonText: 'No, cancela', // Botón de cancelación
+					// Si el usuario hace clic en confirmar:
+					confirmButtonColor: '#3085d6',
+					// Si el usuario hace clic en cancelar:
+					cancelButtonColor: '#d33',
+				}).then((result) => {
+					if (result.isConfirmed) {
+						Swal.fire(
+							'¡Confirmado!',
+							'Has confirmado la acción.',
+							'success'
+						);
+					} else if (result.isDismissed) {
+						Swal.fire(
+							'Cancelado',
+							'Has cancelado la acción.',
+							'error'
+						);
+					}
+				});
+			});
+		</script>		
         
     </body>
 	

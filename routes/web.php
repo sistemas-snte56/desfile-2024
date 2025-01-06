@@ -5,6 +5,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\RegionController;
 use App\Http\Controllers\Usuario\UsuarioController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Coordinador\CoordinadorController;
@@ -44,70 +45,20 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
         Route::put('/role/{id}/updateRolePermission', [RoleController::class, 'updateRolePermission'])->name('role.updateRolePermission');
         Route::resource('/permission', PermissionController::class)->names('permission');
         Route::resource('/user', UserController::class)->names('user'); 
+        Route::resource('/region', RegionController::class)->names('region'); 
     });
-
-
-
 });
 
-    Route::prefix('usuario')
-        ->middleware(['role:Usuario'])
-        ->group(function () {
-            route::get('/dashboard',[UsuarioController::class,'index'])->name('usuario.index');
-            route::get('/{id}',[UsuarioController::class,'show'])->name('usuario.show');
-            Route::put('/{id}', [UsuarioController::class, 'update'])->name('usuario.update');
-    });
-
-
-
-Route::group(['prefix'=>'coordinador','middleware'=>['role:Coordinador']],function()
-{
-    route::get('/dashboard',[CoordinadorController::class,'index'])->name('coordinador.index');
+Route::prefix('usuario')
+    ->middleware(['role:Usuario'])
+    ->group(function () {
+        route::get('/dashboard',[UsuarioController::class,'index'])->name('usuario.index');
+        route::get('/{id}',[UsuarioController::class,'show'])->name('usuario.show');
+        Route::put('/{id}', [UsuarioController::class, 'update'])->name('usuario.update');
 });
 
-
-
-/*
-    Route::group(['prefix'=>'usuario','middleware'=>['role:Usuario']],function(){
-        // Grupo de rutas con el prefijo 'usuario' y middleware 'role:usuario'
-        Route::resource('/', UsuarioController::class)->names('usuario');
-    });
-*/
-
-
-
-
-
-
-
-/*
-Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified',
-])->group(function () {
-    // Route::get('/dashboard', function () {
-    //     return view('dashboard');
-    // })->name('dashboard');
-
-
-
-
-    // Ruta para el Usuario
-
-   
+Route::prefix('coordinador')
+    ->middleware(['role:Coordinador'])
+    ->group(function(){
+        route::get('/dashboard',[CoordinadorController::class,'index'])->name('coordinador.index');
 });
-
-
-/*
-
-
-Route::group(['prefix'=>'admin'],function(){
-    Route::resource('/', AdminController::class)->names('admin');
-    Route::resource('/role', RoleController::class)->names('role');
-    Route::resource('/permission', PermissionController::class)->names('permission');
-    Route::resource('/user', UserController::class)->names('user');     
-})->middleware(['auth:sanctum', 'verified', 'role:administrador']);
-
-Route::resource('/usuario', UsuarioController::class)
-    ->names('usuario')
-    ->middleware(['auth:sanctum', 'verified', 'role:usuario']);
-
-    */
