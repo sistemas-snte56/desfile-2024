@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\RegionController;
 use App\Http\Controllers\Usuario\UsuarioController;
+use App\Http\Controllers\Admin\DelegacionController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Coordinador\CoordinadorController;
 
@@ -46,6 +47,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
         Route::resource('/permission', PermissionController::class)->names('permission');
         Route::resource('/user', UserController::class)->names('user'); 
         Route::resource('/region', RegionController::class)->names('region'); 
+        Route::resource('/delegacion', DelegacionController::class)->names('delegacion'); 
     });
 });
 

@@ -342,7 +342,7 @@ return [
             ],
             [
                 'text' => 'Delegaciones',
-                'url' => '#',
+                'route' => 'delegacion.index',
                 'icon' => 'fas fa-fw fa-user',
                 'can' => 'delegacion.index'
             ],
