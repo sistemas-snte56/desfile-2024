@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Models\Admin\Delegation;
+use App\Models\Admin\Teacher;
 use Laravel\Sanctum\HasApiTokens;
 use Laravel\Jetstream\HasProfilePhoto;
 use Illuminate\Notifications\Notifiable;
@@ -73,5 +74,11 @@ class User extends Authenticatable
     public function delegations(){
         return $this->belongsTo(Delegation::class, 'id_delegacion');
     }
+
+    // Un User puede tener muchos Teachers
+    public function teachers()
+    {
+        return $this->hasMany(Teacher::class, 'id_user');
+    }    
     
 }

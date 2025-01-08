@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\RegionController;
+use App\Http\Controllers\Admin\TeacherController;
 use App\Http\Controllers\Usuario\UsuarioController;
 use App\Http\Controllers\Admin\DelegacionController;
 use App\Http\Controllers\Admin\PermissionController;
@@ -57,6 +58,13 @@ Route::prefix('usuario')
         route::get('/dashboard',[UsuarioController::class,'index'])->name('usuario.index');
         route::get('/{id}',[UsuarioController::class,'show'])->name('usuario.show');
         Route::put('/{id}', [UsuarioController::class, 'update'])->name('usuario.update');
+
+        // Creando nuevo maestro
+        Route::get('maestro/create', [TeacherController::class,'create'])->name('usuario.teacher.create');
+        Route::post('maestro', [TeacherController::class,'store'])->name('usuario.teacher.store');
+        Route::get('maestro/{slug}/edit', [TeacherController::class, 'edit'])->name('usuario.teacher.edit');
+        Route::put('maestro/{slug}', [TeacherController::class, 'update'])->name('usuario.teacher.update');
+        Route::delete('maestro/{slug}', [TeacherController::class,'destroy'])->name('usuario.teacher.destroy');
 });
 
 Route::prefix('coordinador')

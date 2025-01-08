@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Usuario;
 
 use App\Models\Admin\Region;
 use Illuminate\Http\Request;
+use App\Models\Admin\Teacher;
 use App\Models\Admin\Delegation;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\User;
@@ -17,10 +18,14 @@ class UsuarioController extends Controller
      */
     public function index()
     {
+        // Obtén el usuario autenticado
         $user = Auth::user();
 
+        // Obtén todos los maestros que pertenecen a este usuario
+        $teachers = Teacher::where('id_user', $user->id)->get();
 
-        return view('usuario.index', compact('user'));
+        // Puedes pasar los maestros a la vista o utilizarlos en la lógica de tu aplicación
+        return view('usuario.index', compact('teachers', 'user'));        
     }
 
     /**
