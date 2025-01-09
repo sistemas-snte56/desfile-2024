@@ -46,6 +46,7 @@
                     'TELÉFONO',
                     'CORREO ELECTRÓNICO',
                     'FOLIO',
+                    ['label' => 'CONSTANCIA', 'no-export' => true, 'width' => 10],
                     ['label' => 'ACCIONES', 'no-export' => true, 'width' => 10],
                 ];
 
@@ -55,6 +56,7 @@
                     ['orderable' => false],
                     ['orderable' => false, 'visible' => false],
                     ['orderable' => true],
+                    ['orderable' => false],
                     ['orderable' => false],
                     ['orderable' => false],
                     ['orderable' => false],
@@ -89,6 +91,14 @@
                         <td> {{ $teacher->telefono }} </td>
                         <td> {{ $teacher->email }} </td>
                         <td> {{ $teacher->folio }} </td>
+                        <td> 
+                            {!! Form::open(['route' => ['usuario.teacher.constancia',$teacher->codigo_id], 'method' => 'POST', 'style' => 'display: inline', 'target' => '_blank']) !!}
+                                @csrf
+                                <div class="form-group">
+                                    {!! Form::submit('Pdf', ['class' => 'btn btn-primary btn-sm']) !!}
+                                </div>
+                            {!! Form::close() !!}
+                        </td>
                         <td>
                             <a href="{{route('usuario.teacher.edit',$teacher->slug)}}" class="btn btn-success btn-sm" >
                                 Editar

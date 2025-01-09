@@ -11,6 +11,7 @@ use App\Http\Controllers\Usuario\UsuarioController;
 use App\Http\Controllers\Admin\DelegacionController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Coordinador\CoordinadorController;
+use App\Http\Controllers\PdfController;
 
 /*
 |--------------------------------------------------------------------------
@@ -65,6 +66,8 @@ Route::prefix('usuario')
         Route::get('maestro/{slug}/edit', [TeacherController::class, 'edit'])->name('usuario.teacher.edit');
         Route::put('maestro/{slug}', [TeacherController::class, 'update'])->name('usuario.teacher.update');
         Route::delete('maestro/{slug}', [TeacherController::class,'destroy'])->name('usuario.teacher.destroy');
+
+        Route::post('maestro/pdf/{codigo_id}',[PdfController::class,'generadorPDF'])->name('usuario.teacher.constancia');
 });
 
 Route::prefix('coordinador')
