@@ -97,7 +97,7 @@
         <div class="folio">Folio: {{ $maestro->folio }}</div>
         <div class="code">Code: {{ $maestro->codigo_id }}</div>
         <div class="qr">
-            {{-- {!! DNS2D::getBarcodeHTML("$maestro->codigo_qr",'QRCODE',6,6) !!}                         --}}
+            {!! DNS2D::getBarcodeHTML("$maestro->codigo_qr",'QRCODE',6,6) !!}
         </div>
     </div>
 </body>

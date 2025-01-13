@@ -20,10 +20,10 @@ class PdfController extends Controller
         }
 
         # Construir el enlace con el código_id para el QR
-        // $enlace = route('constancias.pdf', ['codigo_id' => $codigo_id]);
-        // $maestro->codigo_qr = $enlace;
-        // return $maestro;
-        // $maestro->update();
+        $enlace = route('usuario.teacher.constancia', ['codigo_id' => $codigo_id]);
+        $maestro->codigo_qr = $enlace;
+        
+        $maestro->update();
 
         $pdf = PDF::loadView('usuario.pdf.index', compact('maestro'))
             ->setPaper('letter','portrait')
