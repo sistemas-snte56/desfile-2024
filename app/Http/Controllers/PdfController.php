@@ -19,6 +19,12 @@ class PdfController extends Controller
             abort(404);
         }
 
+        # Construir el enlace con el código_id para el QR
+        // $enlace = route('constancias.pdf', ['codigo_id' => $codigo_id]);
+        // $maestro->codigo_qr = $enlace;
+        // return $maestro;
+        // $maestro->update();
+
         $pdf = PDF::loadView('usuario.pdf.index', compact('maestro'))
             ->setPaper('letter','portrait')
             ->setOption(['dpi' => 200, 'defaultFont' => 'Helvetica'])

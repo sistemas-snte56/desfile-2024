@@ -353,6 +353,12 @@ return [
                 'can' => 'user.index'
             ],
             [
+                'text' => 'Maestros',
+                'route' => 'teacher.index',
+                'icon' => 'fas fa-fw fa-user',
+                // 'can' => 'user.index'
+            ],
+            [
                 'text' => 'Roles',
                 'route' => 'role.index',
                 'icon' => 'fas fa-fw fa-user',
