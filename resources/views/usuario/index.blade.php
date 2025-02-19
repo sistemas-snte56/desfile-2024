@@ -20,6 +20,21 @@
             {{ $user->delegations->region->sede }}<br>
             <strong>FECHA DE REGISTRO:</strong> {{ $user->created_at->format('d/m/Y') }}<br>
         </p>
+
+        @if($user->status_lista)
+            <!-- Mostrar callout para 'Lista entregada' -->
+            <x-adminlte-callout theme="success" title-class="text-success text-uppercase"
+                icon="fas fa-sm fa-thumbs-up" title="Listado entregada">
+                <i>Ahora puedes descargar tus constancias dando clic en el botón descargar.</i>
+            </x-adminlte-callout>
+        @else
+            <!-- Mostrar callout para 'Lista no entregada' -->
+            <x-adminlte-callout theme="danger" title-class="text-danger text-uppercase"
+                icon="fas fa-sm fa-exclamation-circle" title="Listado no entregada">
+                <i>El listado de su delegación/ct aún no ha sido entregado en la Secretaría General...!</i>
+            </x-adminlte-callout>
+        @endif
+
     </x-adminlte-card>
 @stop
 
@@ -92,12 +107,27 @@
                         <td> {{ $teacher->email }} </td>
                         <td> {{ $teacher->folio }} </td>
                         <td> 
-                            {!! Form::open(['route' => ['usuario.teacher.constancia',$teacher->codigo_id], 'method' => 'POST', 'style' => 'display: inline', 'target' => '_blank']) !!}
-                                @csrf
-                                <div class="form-group">
-                                    {!! Form::submit('Pdf', ['class' => 'btn btn-primary btn-sm']) !!}
-                                </div>
-                            {!! Form::close() !!}
+
+
+                            @if($user->status_lista)
+                                {!! Form::open(['route' => ['usuario.teacher.constancia',$teacher->codigo_id], 'method' => 'POST', 'style' => 'display: inline', 'target' => '_blank']) !!}
+                                    @csrf
+                                    <div class="form-group">
+                                        {!! Form::submit('Descarga', ['class' => 'btn btn-primary btn-sm']) !!}
+                                    </div>
+                                {!! Form::close() !!}
+                            
+                            @else
+                                {!! Form::open(['url' => '#', 'method' => 'POST', 'style' => 'display: inline', 'target' => '_blank']) !!}
+                                    @csrf
+                                    <div class="form-group">
+                                        {!! Form::submit('Descarga', ['class' => 'btn btn-primary btn-sm', 'disabled' => 'disabled']) !!}
+                                    </div>
+                                {!! Form::close() !!}
+                            @endif
+
+
+
                         </td>
                         <td>
                             <a href="{{route('usuario.teacher.edit',$teacher->slug)}}" class="btn btn-success btn-sm" >

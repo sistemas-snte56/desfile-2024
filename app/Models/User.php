@@ -37,6 +37,7 @@ class User extends Authenticatable
         'email',
         'status_lista',
         'password',
+        'role'
     ];
 
 

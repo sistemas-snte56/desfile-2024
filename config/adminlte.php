@@ -356,7 +356,7 @@ return [
                 'text' => 'Maestros',
                 'route' => 'teacher.index',
                 'icon' => 'fas fa-fw fa-user',
-                // 'can' => 'user.index'
+                'can' => 'teacher.index'
             ],
             [
                 'text' => 'Roles',
