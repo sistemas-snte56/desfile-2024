@@ -70,6 +70,7 @@ Route::prefix('usuario')
         Route::delete('maestro/{slug}', [TeacherController::class,'destroy'])->name('usuario.teacher.destroy');
 
         Route::post('maestro/pdf/{codigo_id}',[PdfController::class,'generadorPDF'])->name('usuario.teacher.constancia');
+        Route::get('maestro/generar-pdf/{codigo_id}',[PdfController::class,'generadorPDF'])->name('teacher.constancia');
 });
 
 Route::prefix('coordinador')
