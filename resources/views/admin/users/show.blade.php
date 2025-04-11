@@ -124,6 +124,44 @@
 
         <div class="row justify-content-center">
             <div class="col-3 px-4 sm:px-0">
+                <h3 class="text-lg font-medium text-gray-900"> Estatus de lista </h3>
+        
+                <p class="mt-1 text-sm text-gray-600">
+                    Muestra la informacion de lista entregada.
+                </p>
+            </div>        
+
+            <div class="col-4">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <x-adminlte-select-bs name="select_estatus" id="select_estatus" label="¿Ya se ha entregado la lista?"  fgroup-class="col-md-12" >
+                                @if ($user->status_lista == 1)
+                                    <option value="1" selected>Entregada</option>
+                                    <option value="0">Aun no entregada</option>
+                                @elseif ($user->status_lista == 0)
+                                    <option value="1">Entregada</option>
+                                    <option value="0" selected>Aun no entregada</option>
+                                @else
+                                    <option value="1">Entregada</option>
+                                    <option value="0">Aun no entregada</option>
+                                @endif
+                            </x-adminlte-select-bs>
+
+
+
+
+                        </div>                            
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        
+        <hr>
+
+        <div class="row justify-content-center">
+            <div class="col-3 px-4 sm:px-0">
                 <h3 class="text-lg font-medium text-gray-900"> Actualizar contraseña</h3>
         
                 <p class="mt-1 text-sm text-gray-600">

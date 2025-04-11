@@ -27,6 +27,7 @@
                         'A. MATERNO',
                         'DELEGACIÓN',
                         'CORREO ELECTRÓNICO',
+                        'ESTATUS',
                         'ROL',
                         ['label' => 'ACCIONES', 'no-export' => true, 'width' => 10],
                     ];
@@ -52,6 +53,7 @@
                             ['orderable' => true], 
                             ['orderable' => false], 
                             ['orderable' => false], 
+                            ['orderable' => false], 
                         ],
                         'language' => [
                             'url' => 'https://cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json',
@@ -72,6 +74,17 @@
                             <td> {{$user->amaterno}} </td>
                             <td> {{$user->delegations->delegacion}} {{ $user->delegations->nivel_delegaciona }} </td>
                             <td> {{$user->email}} </td>
+                            <td>
+                                @if ($user->status_lista)
+                                    <small style="color: green; font-weight: bold;">
+                                        <i class="fas fa-check-circle"></i> ENTREGADO
+                                    </small>
+                                @else
+                                    <small style="color: red; font-weight: bold;">
+                                        <i class="fas fa-times-circle"></i> AUN NO ENTREGADO
+                                    </small>
+                                @endif
+                            </td>
                             <td>  
                                 @foreach ($user->roles as $role)
                                     <h5><span class="badge badge-primary">{{$role->name}} </span></h5>

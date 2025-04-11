@@ -384,6 +384,13 @@ return [
                 'icon' => 'fas fa-fw fa-home',
                 'can' => 'usuario.index',
             ],
+        ['header' => 'COTEJADOR', 'can'=>'cotejador.dashboard'],
+            [
+                'text' => 'Dashboard',
+                'route' => 'cotejador.index',
+                'icon' => 'fas fa-fw fa-home',
+                'can' => 'cotejador.index',
+            ],
     ],
 
     /*
@@ -578,6 +585,21 @@ return [
             ],
         ],
 
+        // Para activar el plugin de boton switch 
+        /**
+        * php artisan adminlte:plugins install --plugin=bootstrapSwitch
+        */
+        'BootstrapSwitch' => [
+            'active' => true,
+            'files' => [
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => 'vendor/bootstrap-switch/js/bootstrap-switch.min.js',
+                ],
+            ],
+        ],
+        
     ],
 
     /*

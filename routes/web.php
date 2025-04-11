@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\DelegacionController;
 use App\Http\Controllers\Admin\MaestrosController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Coordinador\CoordinadorController;
+use App\Http\Controllers\CotejadorController;
 use App\Http\Controllers\PdfController;
 
 /*
@@ -34,6 +35,7 @@ Route::get('/enlinea', function()
     return view('enlinea');
 });
 
+Route::get('maestro/generar-pdf/{codigo_id}',[PdfController::class,'generadorPDF'])->name('teacher.constancia');
 
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
 
@@ -51,6 +53,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
         Route::resource('/user', UserController::class)->names('user'); 
         Route::resource('/region', RegionController::class)->names('region'); 
         Route::resource('/delegacion', DelegacionController::class)->names('delegacion'); 
+
         Route::resource('teacher', MaestrosController::class)->names('teacher');
     });
 });
@@ -70,11 +73,22 @@ Route::prefix('usuario')
         Route::delete('maestro/{slug}', [TeacherController::class,'destroy'])->name('usuario.teacher.destroy');
 
         Route::post('maestro/pdf/{codigo_id}',[PdfController::class,'generadorPDF'])->name('usuario.teacher.constancia');
-        Route::get('maestro/generar-pdf/{codigo_id}',[PdfController::class,'generadorPDF'])->name('teacher.constancia');
+
+        #Lo agregaremos afuera 
+        // Route::get('maestro/generar-pdf/{codigo_id}',[PdfController::class,'generadorPDF'])->name('teacher.constancia');
 });
 
 Route::prefix('coordinador')
     ->middleware(['role:Coordinador'])
     ->group(function(){
         route::get('/dashboard',[CoordinadorController::class,'index'])->name('coordinador.index');
+});
+
+Route::prefix('cotejador')
+    ->middleware(['role:Cotejador'])
+    ->group(function(){
+        route::get('/dashboard',[CotejadorController::class,'index'])->name('cotejador.index');
+        route::get('/{id}',[CotejadorController::class,'show'])->name('cotejador.show');
+        route::get('/{id}/listado',[CotejadorController::class,'showListadoTeachers'])->name('cotejador.listado');
+        // Route::put('/{id}', [CotejadorController::class, 'update'])->name('cotejador.update');
 });

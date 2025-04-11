@@ -3,6 +3,7 @@
 namespace App\Models\Admin;
 
 use App\Models\User;
+use App\Models\Admin\Teacher;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -29,4 +30,9 @@ class Delegation extends Model
     public function region(){
         return $this->belongsTo(Region::class, 'id_region');
     }    
+
+    public function teachers()
+    {
+        return $this->hasMany(Teacher::class, 'id_delegacion');
+    }
 }

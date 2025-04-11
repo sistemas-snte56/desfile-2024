@@ -46,6 +46,7 @@
             <option value="SECRETARIO GENERAL" {{old('select_cargo') == 'SECRETARIO GENERAL' ? 'selected' : ''}} >SECRETARIO GENERAL</option>
             <option value="SECRETARIA GENERAL" {{old('select_cargo') == 'SECRETARIA GENERAL' ? 'selected' : ''}} >SECRETARIA GENERAL</option>
             <option value="REPRESENTANTE DE C.T." {{old('select_cargo') == 'REPRESENTANTE DE C.T.' ? 'selected' : ''}} >REPRESENTANTE DE C.T.</option>
+            <option value="GESTOR ADMINISTRATIVO" {{old('select_cargo') == 'GESTOR ADMINISTRATIVO' ? 'selected' : ''}} >GESTOR ADMINISTRATIVO</option>
         </x-adminlte-select2>
 
 

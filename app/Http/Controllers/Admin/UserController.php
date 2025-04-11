@@ -102,7 +102,7 @@ class UserController extends Controller
             'selectRoles' => ['required'],
             'nombre' => ['required','string'],
             'apaterno' => ['required','string'],
-            'amaterno' => ['required','string'],
+            'amaterno' => ['nullable','string'],
             'email' => ['required','email'],
         ]);
 
@@ -133,6 +133,7 @@ class UserController extends Controller
         $user->apaterno = $request->input('apaterno');
         $user->amaterno = $request->input('amaterno');
         $user->email = $request->input('email');
+        $user->status_lista = $request->input('select_estatus');
         $user->save(); 
 
         $rolesIds = $request->input('selectRoles', []);

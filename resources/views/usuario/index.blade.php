@@ -24,13 +24,13 @@
         @if($user->status_lista)
             <!-- Mostrar callout para 'Lista entregada' -->
             <x-adminlte-callout theme="success" title-class="text-success text-uppercase"
-                icon="fas fa-sm fa-thumbs-up" title="Listado entregada">
+                icon="fas fa-sm fa-thumbs-up" title="Lista entregada">
                 <i>Ahora puedes descargar tus constancias dando clic en el botón descargar.</i>
             </x-adminlte-callout>
         @else
             <!-- Mostrar callout para 'Lista no entregada' -->
             <x-adminlte-callout theme="danger" title-class="text-danger text-uppercase"
-                icon="fas fa-sm fa-exclamation-circle" title="Listado no entregada">
+                icon="fas fa-sm fa-exclamation-circle" title="Lista no entregada">
                 <i>El listado de su delegación/ct aún no ha sido entregado en la Secretaría General...!</i>
             </x-adminlte-callout>
         @endif

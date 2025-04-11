@@ -7,22 +7,33 @@
 @stop
 
 @section('content')
-    @switch(auth()->user()->roles->first()->name)
-        @case('Administrador')
-                @can('admin.dashboard')
-                    @include('dashboard.administrador')
-                @endcan
-            @break
-        @case('Coordinador')
-                @can('coordinador.dashboard')
-                    @include('dashboard.coordinador')
-                @endcan
-            @break
-        @default
-                @can('usuario.dashboard')
-                    @include('dashboard.usuario')
-                @endcan
-    @endswitch
+    @php
+        $user = auth()->user();
+        $role = $user?->roles->first();
+    @endphp
+
+    @if (!$role)
+        <div class="alert alert-warning">
+            No tienes un rol asignado. Por favor, contacta al administrador del sistema.
+        </div>
+    @else
+        @switch(auth()->user()->roles->first()->name)
+            @case('Administrador')
+                    @can('admin.dashboard')
+                        @include('dashboard.administrador')
+                    @endcan
+                @break
+            @case('Coordinador')
+                    @can('coordinador.dashboard')
+                        @include('dashboard.coordinador')
+                    @endcan
+                @break
+            @default
+                    @can('usuario.dashboard')
+                        @include('dashboard.usuario')
+                    @endcan
+        @endswitch
+    @endif
 @stop
 
 @section('css')

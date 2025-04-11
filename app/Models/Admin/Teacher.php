@@ -3,6 +3,7 @@
 namespace App\Models\Admin;
 
 use App\Models\User;
+use App\Models\Admin\Delegation;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -34,5 +35,10 @@ class Teacher extends Model
     public function user()
     {
         return $this->belongsTo(User::class, 'id_user');
+    }    
+
+    public function delegacion()
+    {
+        return $this->belongsTo(Delegation::class, 'id_delegacion');
     }    
 }
