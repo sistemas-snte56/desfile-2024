@@ -1,6 +1,8 @@
 @extends('adminlte::page')
 
-@section('title', 'Usuario')
+{{-- @section('title', '{{ $user->delegations->delegacion.' '.$user->delegations->nivel_delegaciona }}') --}}
+@section('title', $user->delegations->delegacion)
+
 
 @section('content_header')
     <x-adminlte-card title="INFORMACIÓN" theme="secondary" icon="fas fa-lg fa-user" removable collapsible>
@@ -54,10 +56,14 @@
             @php
                 $heads = [
                     'ID',
+                    'REGIÓN',
                     'DELEGACION',
                     'NOMBRE',
+                    'APELLIDO PATERNO',
+                    'APELLIDO MATERNO',
                     'NUM. DE PERSONAL',
                     'RFC',
+                    'GENERO',
                     'TELÉFONO',
                     'CORREO ELECTRÓNICO',
                     'FOLIO',
@@ -68,16 +74,20 @@
                 $config = [
                 'order' => [[1, 'asc']],
                 'columns' => [
-                    ['orderable' => false],
+                    ['orderable' => false, 'visible' => true],
                     ['orderable' => false, 'visible' => false],
-                    ['orderable' => true],
-                    ['orderable' => false],
-                    ['orderable' => false],
-                    ['orderable' => false],
-                    ['orderable' => false],
-                    ['orderable' => false],
-                    ['orderable' => false],
-                    ['orderable' => false],
+                    ['orderable' => false, 'visible' => false],
+                    ['orderable' => true,  'visible' => true],
+                    ['orderable' => false, 'visible' => true],
+                    ['orderable' => false, 'visible' => true],
+                    ['orderable' => false, 'visible' => true],
+                    ['orderable' => false, 'visible' => true],
+                    ['orderable' => false, 'visible' => true],
+                    ['orderable' => false, 'visible' => true],
+                    ['orderable' => false, 'visible' => true],
+                    ['orderable' => false, 'visible' => true],
+                    ['orderable' => false, 'visible' => true],
+                    ['orderable' => false, 'visible' => true],
                 ],
                 'language' => [
                     'url' => 'https://cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json',
@@ -95,14 +105,19 @@
                     <tr>
                         <td>{{ $key ++ }}</td>
                         <td>
+                            {{ $user->delegations->region->region . ' - ' . $user->delegations->region->sede }}
+                        </td>
+                        <td>
 
-                            {{ $user->delegations->delegacion }} /
-                            {{ $user->delegations->region->region }} 
+                            {{ $user->delegations->delegacion.' '.$user->delegations->nivel_delegaciona  }} 
 
                         </td>
-                        <td> {{ $teacher->nombre }} {{ $teacher->apaterno }} {{ $teacher->amaterno }} </td>
+                        <td> {{ $teacher->nombre }} </td>
+                        <td> {{ $teacher->apaterno }} </td>
+                        <td> {{ $teacher->amaterno }} </td>
                         <td> {{ $teacher->npersonal }} </td>
                         <td> {{ $teacher->rfc }} </td>
+                        <td> {{ $teacher->genero }} </td>
                         <td> {{ $teacher->telefono }} </td>
                         <td> {{ $teacher->email }} </td>
                         <td> {{ $teacher->folio }} </td>

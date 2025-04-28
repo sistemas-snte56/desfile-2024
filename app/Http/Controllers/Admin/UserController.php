@@ -18,21 +18,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        /*
-            // Obtener el usuario autenticado
-            $user = Auth::user();
-
-            // Filtrar delegaciones que están asociadas al usuario autenticado
-            // (Asumiendo que tienes una relación con 'user_id' en la tabla 'delegacions')
-            $delegaciones = Delegation::where('user_id', $user->id)
-                                    ->orderBy('nombre', 'asc')
-                                    ->get();
-
-            // Pasar las delegaciones a la vista        
-            $delegaciones = Delegation::orderBy('delegacion','asc')->get();
-        */
-
-        $users = User::all();
+         $users = User::all();
 
         $regiones = Region::all();
         $delegaciones = Delegation::all();

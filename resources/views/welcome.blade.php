@@ -158,9 +158,7 @@
 		           	<div class="row">
 			           	<div class="col-sm-3">
 			           		 <div class="navbar-header">
-				                <a class="navbar-brand" href="index.html">list<span>race</span></a>
-
-								
+				                &nbsp;
 				            </div><!--/.navbar-header-->
 			           	</div>
 			           	<div class="col-sm-9">

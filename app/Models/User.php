@@ -81,5 +81,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(Teacher::class, 'id_user');
     }    
+
+    public function observaciones()
+    {
+        return $this->hasMany(Observacion::class);
+    }
     
 }

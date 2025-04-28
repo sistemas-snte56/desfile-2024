@@ -7,7 +7,7 @@
 @stop
 
 @section('content')
-<div class="card">
+    <div class="card">
         <div class="card-header"style="background-color: #ee7a00;">
             <h4 style="color:#FFFFFF;"><strong>LISTADO DE TODOS LOS USUARIOS</strong></h4>
         </div>
@@ -22,13 +22,15 @@
                 @php
                     $heads = [
                         'ID',
+                        ['label' => 'REGION', 'no-export' => true, 'width' => 10],
+                        'DELEGACIÓN',
                         'NOMBRE',
                         'A. PATERNO',
                         'A. MATERNO',
-                        'DELEGACIÓN',
                         'CORREO ELECTRÓNICO',
                         'ESTATUS',
                         'ROL',
+                        'OBSERVACIONES',
                         ['label' => 'ACCIONES', 'no-export' => true, 'width' => 10],
                     ];
                     $btnEdit = '<button class="btn btn-xs btn-default text-primary mx-1 shadow" title="Edit">
@@ -51,9 +53,11 @@
                             ['orderable' => true], 
                             ['orderable' => true], 
                             ['orderable' => true], 
-                            ['orderable' => false], 
-                            ['orderable' => false], 
-                            ['orderable' => false], 
+                            ['orderable' => true], 
+                            ['orderable' => true], 
+                            ['orderable' => true], 
+                            ['orderable' => true], 
+                            ['orderable' => true], 
                         ],
                         'language' => [
                             'url' => 'https://cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json',
@@ -69,10 +73,11 @@
                     @foreach ($users as $user)
                         <tr>
                             <td> {{$user->id}} </td>
+                            <td> {{$user->delegations->region->region}}</td>
+                            <td> {{$user->delegations->delegacion}} {{ $user->delegations->nivel_delegaciona }} </td>
                             <td> {{$user->nombre}} </td>
                             <td> {{$user->apaterno}} </td>
                             <td> {{$user->amaterno}} </td>
-                            <td> {{$user->delegations->delegacion}} {{ $user->delegations->nivel_delegaciona }} </td>
                             <td> {{$user->email}} </td>
                             <td>
                                 @if ($user->status_lista)
@@ -88,6 +93,24 @@
                             <td>  
                                 @foreach ($user->roles as $role)
                                     <h5><span class="badge badge-primary">{{$role->name}} </span></h5>
+                                @endforeach
+                            </td>
+                            <td>
+                                @foreach ($user->observaciones as $observacion)
+                                    <p><strong>Observación:</strong> {{ $observacion->mensaje }}</p>
+                            
+                                    <!-- Si la observación no ha sido atendida, mostramos el botón para marcarla como atendida -->
+                                    @if (!$observacion->atendida)
+                                        <form action="{{ route('admin.atender.observacion', $observacion) }}" method="POST">
+                                            @csrf
+                                            @method('PUT')
+                                            <button type="submit" class="btn btn-success btn-sm">Marcar como atendida</button>
+                                        </form>
+                                    @else
+                                        <small style="color: green; font-weight: bold;">
+                                            <i class="fas fa-check-circle"></i> Atendida
+                                        </small>
+                                    @endif
                                 @endforeach
                             </td>
                             <td>

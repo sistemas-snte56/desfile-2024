@@ -1,19 +1,20 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PdfController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\CotejadorController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\ObservacionController;
 use App\Http\Controllers\Admin\RegionController;
 use App\Http\Controllers\Admin\TeacherController;
+use App\Http\Controllers\Admin\MaestrosController;
 use App\Http\Controllers\Usuario\UsuarioController;
 use App\Http\Controllers\Admin\DelegacionController;
-use App\Http\Controllers\Admin\MaestrosController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Coordinador\CoordinadorController;
-use App\Http\Controllers\CotejadorController;
-use App\Http\Controllers\PdfController;
 
 /*
 |--------------------------------------------------------------------------
@@ -55,6 +56,11 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
         Route::resource('/delegacion', DelegacionController::class)->names('delegacion'); 
 
         Route::resource('teacher', MaestrosController::class)->names('teacher');
+
+
+        // Ruta para que el admin marque como atendida la observación
+        Route::put('/admin/observaciones/{observacion}/atender', [ObservacionController::class, 'atender'])->name('admin.atender.observacion');
+
     });
 });
 
@@ -91,4 +97,8 @@ Route::prefix('cotejador')
         route::get('/{id}',[CotejadorController::class,'show'])->name('cotejador.show');
         route::get('/{id}/listado',[CotejadorController::class,'showListadoTeachers'])->name('cotejador.listado');
         // Route::put('/{id}', [CotejadorController::class, 'update'])->name('cotejador.update');
+
+        // Ruta para que el cotejador guarde una observación
+        Route::post('/observaciones', [ObservacionController::class, 'store'])->name('observaciones.store');
+
 });

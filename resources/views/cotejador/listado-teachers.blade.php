@@ -14,11 +14,53 @@
         </h4>
     </div>
     <div class="card-body">
-        <div class="card-title mb-4">
-            <x-adminlte-callout theme="success" title="CARGO: {{$srio->cargo}}">
+
+
+
+
+
+    <x-adminlte-callout theme="success" title="CARGO: {{$srio->cargo}}">
                 <strong>{{$srio->nombre}}&nbsp;{{$srio->apaterno}}&nbsp;{{$srio->amaterno}}</strong><br>
                 {{$srio->delegations->delegacion}}&nbsp;<strong>/</strong>&nbsp;{{$srio->delegations->nivel_delegaciona}}&nbsp;<strong>/</strong>&nbsp;{{$srio->delegations->sede_delegaciona}}<br>
             </x-adminlte-callout>
+
+
+
+
+
+            <!-- Formulario de observación -->
+            <form action="{{ route('observaciones.store') }}" method="POST">
+                @csrf
+                <input type="hidden" name="user_id" value="{{ $srio->id }}">
+
+
+                {{-- With slots, sm size, and feedback disabled --}}
+                <x-adminlte-textarea name="mensaje" label="Mensaje" rows=2 igroup-size="sm"
+                    label-class="text-success" placeholder="Escribe tu observación..." fgroup-class="col-md-12" require disable-feedback>
+                    <x-slot name="prependSlot">
+                        <div class="input-group-text">
+                            <i class="fas fa-lg fa-comment-dots text-success"></i>
+                        </div>
+                    </x-slot>
+                    <x-slot name="appendSlot">
+                        <x-adminlte-button type="submit" theme="success" icon="fas fa-paper-plane" label="Send"/>
+                    </x-slot>
+                </x-adminlte-textarea>
+            </form>
+
+
+
+
+
+
+
+
+        <div class="card-title mb-4">
+
+
+
+
+
         </div>
         <div class="card-text">
             {{-- Setup data for datatables --}}
